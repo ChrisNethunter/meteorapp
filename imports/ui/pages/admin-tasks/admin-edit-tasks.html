@@ -1,0 +1,41 @@
+<template name="admin_edit_tasks">
+	<div class="container-example-chris">
+
+		<div class="container">
+			
+		    <div class="row">
+		      	<div class="one-half column" style="margin-top: 25%">
+			        <h4>Parametros en FlowRouter</h4>
+			        <p>Si notan en la parte superior estoy ejecutando con Flow Router /edit/tasks/nKJgncjgHCAfR7Ayx. estoy enviando
+			        un parámetro al cual puedo acceder y suscribirme para obneter los datos del registro a editar</p>
+		     	 </div>		      	
+		    </div>
+
+		</div>
+
+		<div class="section get-help" align="left" style="text-align: left !important;  ">
+			<div class="container">
+
+		        <div id="content-form-create" class="row">
+		        
+					<form id="form-task-edit">
+					  	<div class="row">
+
+						    <div class="six columns">
+						      <label for="exampleEmailInput">Name Task</label>
+						      <input class="u-full-width" type="text" placeholder="Namen Task" id="name_task" value="{{task.name}}">
+						    </div>
+
+						    <div class="six columns">
+						      	<label for="exampleMessage">Description</label>
+						  		<input class="u-full-width" type="text" placeholder="description Task" id="description_task" value="{{task.description}}">
+						    </div>
+
+					  	</div>
+					  <input class="button-primary" type="submit" value="Save">
+					</form>
+		        </div>	
+			</div>
+		</div>
+	</div>
+</template>
