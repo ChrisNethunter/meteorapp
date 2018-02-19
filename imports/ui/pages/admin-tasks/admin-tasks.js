@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { NoEmpty } from '../../../../client/js/validations.js';
 import { Tasks } from '/imports/api/tasks/tasks.js';
 import './admin-tasks.html';
 
@@ -11,8 +10,10 @@ Template.admin_tasks.onRendered( () => {
 
 });
 
-Template.admin_tasks.onCreated( () =>  { 
+Template.admin_tasks.onCreated( () =>  {
+
 	handlerTaskSuscription = Meteor.subscribe("tasks.all");
+
 });
 
 Template.admin_tasks.events({
@@ -22,15 +23,12 @@ Template.admin_tasks.events({
   		const form = $('#content-form-create');
 
 	    if (  form.hasClass('toogle') ) {
-
 	    	form.removeClass('toogle');
 	    	form.fadeOut('slow');
 	    } else {
 	    	form.addClass('toogle');
 	    	form.fadeIn('slow');
 	    };
-
-	    
   	},
 
   	'submit #form-task'(event, instance) {
@@ -55,7 +53,7 @@ Template.admin_tasks.events({
 
   		Meteor.call('tasks.remove',event.currentTarget.id,(error, response)=>{
 		    if(error){
-		    	alert("Error " + error);
+		    	Bert.alert( 'Error ' + error, 'danger', 'fixed-top', 'fa fa-times' );
 		    }
 		});
   	}
@@ -64,24 +62,25 @@ Template.admin_tasks.events({
 
 function insert_task (task) {
 
-	if ( NoEmpty('name_task' , task.name ) &&  NoEmpty('description_task' , task.description ) ) {
+	if ( task.name != "" &&  task.description !="" ) {
 
 
 		Meteor.call('tasks.insert',task,(error, response)=>{
+
 		    if(error){
 
-		    	alert("Error " + error);
-		    	
+		    	Bert.alert( 'Error ' + error, 'danger', 'fixed-top', 'fa fa-times' );
 
 		    }else{
-		  		Bert.alert( 'Yes, I do Mind!', 'danger', 'growl-top-right' );
-		    	//alert("Good");
+		  		Bert.alert( 'Se Inserto nuestra Tarea correctamente', 'success', 'fixed-top', 'fa fa-check' );
+	
 		    }
+
 		});
 			
 	} else {
 
-		alert("Empty Fields");
+		Bert.alert( 'Campos vacíos!', 'danger', 'fixed-top', 'fa fa-times' );
 	}
 }
 
@@ -94,6 +93,7 @@ Template.admin_tasks.helpers({
 });
 
 Template.admin_tasks.onDestroyed(function () {
+
 	handlerTaskSuscription.stop();
   	
 });

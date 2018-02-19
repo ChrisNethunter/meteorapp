@@ -1,16 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Tasks } from '/imports/api/tasks/tasks.js';
-import { NoEmpty } from '../../../../client/js/validations.js';
 import './admin-edit-tasks.html';
-
-Template.admin_edit_tasks.onRendered( () => {
-  	//alert("id " + FlowRouter.getParam("_id"));
-});
-
-Template.admin_edit_tasks.onCreated( () =>  { 
-	
-});
 
 Template.admin_edit_tasks.events({
 	'submit #form-task-edit'(event, instance) {
@@ -36,23 +27,22 @@ Template.admin_edit_tasks.helpers({
 
 function edit_task (task) {
 
-	if ( NoEmpty('name_task' , task.name ) &&  NoEmpty('description_task' , task.description ) ) {
+	if ( task.name != '' &&  task.description  != '' ) {
 
 		Meteor.call('tasks.edit',task,(error, response)=>{
 		    if(error){
 
-		    	alert("Error " + error);
-		    	
+		    	Bert.alert( 'Error ' + error, 'danger', 'fixed-top', 'fa fa-times' );
 
 		    }else{
 		    	 
-		    	alert("Good Edit Task");
+		    	Bert.alert( 'Se Edito nuestra Tarea correctamente', 'success', 'fixed-top', 'fa fa-check' );
 		    	
 		    }
 		});
 			
 	} else {
 
-		alert("Fields Empty");
+		Bert.alert( 'Campos vacíos!', 'danger', 'fixed-top', 'fa fa-times' );
 	}
 }

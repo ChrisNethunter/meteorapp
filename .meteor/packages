@@ -23,4 +23,9 @@ kadira:blaze-layout            # Layout manager for blaze (works well with FlowR
 meteortesting:mocha               # A package for writing and running your meteor app and package tests with mocha
 johanbrook:publication-collector  # Test a Meteor publication by collecting its output
 themeteorchef:bert
-aldeed:simple-schema	
+aldeed:simple-schema
+
+# accounts
+accounts-ui
+accounts-password
+accounts-base	

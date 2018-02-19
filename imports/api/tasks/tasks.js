@@ -14,23 +14,7 @@ TasksSchema = new SimpleSchema({
 					label : "Descripcion",
 					max   : 200
 			 	},
-
-	owner   : 	{
-					type  : String,
-					label : "Autor",
-					optional: true,
-					autoValue : () =>{
-						return this.userId
-					}
-			 	},
-	createdAt:  {
-					type  : Date,
-					label : "Creado",
-					autoValue : () =>{
-						return new Date()
-					} 
-				}				
+			
 });
 
 
-//Tasks.attachSchema(TasksSchema);
